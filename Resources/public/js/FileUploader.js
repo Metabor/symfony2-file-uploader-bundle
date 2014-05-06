@@ -65,10 +65,11 @@ function PunkAveFileUploader(options)
   }
 
   editor.fileupload({
+    forceIframeTransport: true,
     dataType: 'json',
     url: uploadUrl,
     dropZone: $el.find('[data-dropzone="1"]'),
-    done: function (e, data) {
+    done: function (e, data) { console.log('done');
       if (data)
       {
         _.each(data.result, function(item) {
@@ -76,14 +77,30 @@ function PunkAveFileUploader(options)
         });
       }
     },
-    start: function (e) {
+    add: function (e, data) { console.log('add');
+      $('.upload-test').on('click', function () {
+        console.log(data);
+        data.submit();
+      })
+    },
+    start: function (e) { console.log('start');
       $el.find('[data-spinner="1"]').show();
       self.uploading = true;
     },
     stop: function (e) {
       $el.find('[data-spinner="1"]').hide();
       self.uploading = false;
+    },
+    fail: function (e, data) {
+      console.log('fail');
+    },
+    send: function (e, data) {
+      console.log('send');
+    },
+    change: function (e) {
+      console.log('change');
     }
+
   });
 
   // Expects thumbnail_url, url, and name properties. thumbnail_url can be undefined if

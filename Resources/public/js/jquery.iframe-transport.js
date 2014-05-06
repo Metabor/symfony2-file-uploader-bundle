@@ -42,7 +42,8 @@
             return {
                 send: function (_, completeCallback) {
                     form = $('<form style="display:none;"></form>');
-                    form.attr('accept-charset', options.formAcceptCharset);
+
+                  form.attr('accept-charset', options.formAcceptCharset);
                     // javascript:false as initial iframe src
                     // prevents warning popups on HTTPS in IE6.
                     // IE versions below IE8 cannot set the name property of
@@ -69,7 +70,7 @@
                                     if (!response.length || !response[0].firstChild) {
                                         throw new Error();
                                     }
-                                } catch (e) {
+                                } catch (e) {console.log('probleeeem');
                                     response = undefined;
                                 }
                                 // The complete callback returns the
@@ -157,7 +158,7 @@
             'iframe text': function (iframe) {
                 return $(iframe[0].body).text();
             },
-            'iframe json': function (iframe) {
+            'iframe json': function (iframe) {console.log('converting'); console.log($(iframe[0].body).text());
                 return $.parseJSON($(iframe[0].body).text());
             },
             'iframe html': function (iframe) {
