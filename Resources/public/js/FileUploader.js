@@ -144,6 +144,11 @@ function PunkAveFileUploader(options)
         success: function() {
           file.remove();
         },
+        error: function ( xhr , msg, optional ) {
+          if ( optional == 'Locked') {
+            file.find(".error-image-used").show().delay(3000).fadeOut();
+          }
+        },
         dataType: 'json'
       });
       return false;
